@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    tools{
+        maven 'Maven3'
+    }
+
+    stages{
+        stage('CHECKOUT'){
+            steps{
+                git 'https://github.com/bhavithm41-prog/demo2.git'
+            }
+        }
+
+        stage('BUILD'){
+            steps{
+                dir('demo2'){
+                    bat 'mvm clean install'
+                }
+            }
+        }
+
+        stage('TEST'){
+            steps{
+                dir('demo2'){
+                    bat 'mvn test'
+                }
+            }
+        }
+    }
+}
